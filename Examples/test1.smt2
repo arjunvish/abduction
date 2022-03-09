@@ -6,7 +6,7 @@
 
 
 (get-abduct A (>= (+ x y z) 0))
-
+(get-abduct-next)
 ;cvc5 --produce-abducts test1.smt2
 ;(define-fun A () Bool (= (+ x z) y))
 

@@ -1,0 +1,5 @@
+On QF_LIA benchmarks: --produce-abducts
+
+To produce multiple solutions the option --sygus-stream should be used, which prevents CVC4 from halting as soon as a single solution is solved.
+
+(get-abduct name (formula))

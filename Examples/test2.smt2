@@ -5,7 +5,14 @@
 (assert (>= (f x y) 0))
 
 
-;(get-abduct A (<= 0 (f y x)))
+(get-abduct A (>= (f y x) 0))
+(get-abduct-next)
+(get-abduct-next)
+(get-abduct-next)
+(get-abduct-next)
+(get-abduct-next)
+(get-abduct-next)
+(get-abduct-next)
 
 ;cvc5 --produce-abducts test2.smt2
 ;(define-fun A () Bool (= y x))

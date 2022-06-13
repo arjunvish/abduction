@@ -1,0 +1,45 @@
+; Signed and Unsigned 8-bit BVs
+((GB Bool) (GBV8 (_ BitVec 8))) ; Grammar non-terminals
+  ( ; Grammar rules
+      (GB Bool ((= GBV8 GBV8)) (not GB) (and GB GB) (or GB GB)  ;both
+                (bvult GBV8 GBV8)                               ;unsigned 
+                (bvslt GBV8 GBV8))                              ;signed
+      (GBV8 (_ BitVec 8) (s0 s1 ;variables
+                          #b00000000 #b00000001 ;constants 
+                          (bvnot GBV8) (bvand GBV8 GBV8) (bvor GBV8 GBV8) (bvxor GBV8 GBV8)     ;logical
+                          (bvneg GBV8) (bvadd GBV8 GBV8) (bvsub GBV8 GBV8) (bvmul GBV8 GBV8)    ;arithmetic
+                          (bvudiv GBV8 GBV8) (bvurem GBV8 GBV8)                                 ;arithmetic unsigned
+                          (bvsdiv GBV8 GBV8) (bvsrem GBV8 GBV8)                                 ;arithmetic signed
+                          (bvshl GBV8 GBV8) (bvlshr GBV8 GBV8)                                  ;shifts
+                          (bvashr GBV8 GBV8)                                                    ;shifts signed
+                          (ite GB GBV8 GBV8) ))                                                 ;ite
+  )
+
+; Signed 8-bit BVs
+((GB Bool) (GBV8 (_ BitVec 8))) ; Grammar non-terminals
+  ( ; Grammar rules
+      (GB Bool ((= GBV8 GBV8)) (not GB) (and GB GB) (or GB GB)  ;both
+                (bvslt GBV8 GBV8))                              ;signed
+      (GBV8 (_ BitVec 8) (s0 s1 ;variables
+                          #b00000000 #b00000001 ;constants 
+                          (bvnot GBV8) (bvand GBV8 GBV8) (bvor GBV8 GBV8) (bvxor GBV8 GBV8)     ;logical
+                          (bvneg GBV8) (bvadd GBV8 GBV8) (bvsub GBV8 GBV8) (bvmul GBV8 GBV8)    ;arithmetic
+                          (bvsdiv GBV8 GBV8) (bvsrem GBV8 GBV8)                                 ;arithmetic signed
+                          (bvshl GBV8 GBV8) (bvlshr GBV8 GBV8)                                  ;shifts
+                          (bvashr GBV8 GBV8)                                                    ;shifts signed
+                          (ite GB GBV8 GBV8) ))                                                 ;ite
+  )
+
+; Unsigned 8-bit BVs
+((GB Bool) (GBV8 (_ BitVec 8))) ; Grammar non-terminals
+  ( ; Grammar rules
+      (GB Bool ((= GBV8 GBV8)) (not GB) (and GB GB) (or GB GB)  ;both
+                (bvult GBV8 GBV8)                               ;unsigned
+      (GBV8 (_ BitVec 8) (s0 s1 ;variables
+                          #b00000000 #b00000001 ;constants 
+                          (bvnot GBV8) (bvand GBV8 GBV8) (bvor GBV8 GBV8) (bvxor GBV8 GBV8)     ;logical
+                          (bvneg GBV8) (bvadd GBV8 GBV8) (bvsub GBV8 GBV8) (bvmul GBV8 GBV8)    ;arithmetic
+                          (bvsdiv GBV8 GBV8) (bvsrem GBV8 GBV8)                                 ;arithmetic signed
+                          (bvshl GBV8 GBV8) (bvlshr GBV8 GBV8)                                  ;shifts
+                          (ite GB GBV8 GBV8) ))                                                 ;ite
+  )

@@ -1,8 +1,0 @@
-(set-option :print-success true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-logic QF_UFLIA)
-(declare-fun op_2 () Int)
-(declare-fun op_0 () Int)
-(declare-fun op_1 () Int)
-(get-abduct A (not (not (=> (>= op_0 0) (>= (+ (+ op_1 op_0) op_2) 0)))))

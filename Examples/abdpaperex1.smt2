@@ -1,3 +1,7 @@
+;Example from abduction paper
+;Hypothesis is separated from goal
+(set-option :produce-abducts true)
+(set-option :incremental true)
 (set-logic QF_LIA)
 (declare-fun x () Int)
 (declare-fun y () Int)

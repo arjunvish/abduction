@@ -1,3 +1,4 @@
+;can i ask for abducts when my query is unsat already?
 (set-logic QF_LIA)
 
 (get-abduct A (and true (not true)))

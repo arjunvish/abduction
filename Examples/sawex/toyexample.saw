@@ -1,0 +1,12 @@
+let {{
+    f x y = (x : [32]) + y
+}};
+t1 <- {{ \a b c -> (a == b + 1) ==> f b c == f c (a - 1) }};
+//prove_print (offline_unint_smtlib2 [] "toyexample_unint_none") t1;
+prove_print (offline_unint_smtlib2 ["f"] "toyexample_unint_f") t1;
+
+//prove_print (w4_unint_cvc4 ["f"]) t1;
+//[01:44:18.792] Stack trace:
+//"prove_print" (/home/arjun/Desktop/abduction/Examples/tmp/toyexample.saw:7:1-7:12):
+//prove: 1 unsolved subgoal(s)
+//Invalid: [a = 2, b = 1, c = 0]

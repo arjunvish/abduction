@@ -1,5 +1,8 @@
-On QF_LIA benchmarks: --produce-abducts
+- To be able to produce single abducts, either use the command-line option `--produce-abducts` or the command `(set-option :produce-abducts true)`
+- To get an abduct `(get-abduct name (formula) (grammar))` defines a variable `name` as a formula that entails `formula`, using the grammar `grammar`, if provided. Grammars for bit-vectors are specified in the `grammars` file.
 
-To produce multiple solutions the option --sygus-stream should be used, which prevents CVC4 from halting as soon as a single solution is solved.
+- To be able to produce multiple abducts:
+1. In cvc4, use the `--sygus-stream` option, this produces solutions till the process is killed.
+2. In cvc5, in addition to turning the `produce-abducts` option on, either use the command-line option `--incremental` or the command `(set-option :incremental true)`, and the command `(get-abduct-next)` to get additional abducts.
 
-(get-abduct name (formula))
+- On QF_LIA benchmarks use command-line option `--produce-abducts`

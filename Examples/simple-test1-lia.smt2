@@ -1,3 +1,5 @@
+(set-option :produce-abducts true)
+(set-option :incremental true)
 (set-logic QF_UFLIA)
 (declare-fun x () Int)
 (declare-fun y () Int)

@@ -1,0 +1,33 @@
+(set-option :produce-models true)
+(set-option :global-declarations true)
+(set-option :produce-abducts true)
+(set-option :incremental true)
+(set-logic ALL)
+(get-info :error-behavior)
+
+(push 1)
+(declare-fun x () (_ BitVec 8))
+(define-fun x!0 () Bool (bvslt x (_ bv100 8)))
+(assert (! x!0 :named x!1))
+;(assert (bvslt x (_ bv100 8)))
+
+(define-fun x!2 () (_ BitVec 8) (bvadd x (_ bv1 8)))
+(define-fun x!3 () Bool (bvslt x!2 (_ bv100 8)))
+(define-fun x!4 () Bool (not x!3))
+
+(push 2)
+(assert (! x!4 :named x!5))
+;(assert (bvslt (bvadd x (_ bv1 8)) (_ bv100 8)))
+
+(check-sat)
+(get-value (x))
+(pop 2)
+;(get-abduct p (bvslt (bvadd x (_ bv1 8)) (_ bv100 8)))
+(get-abduct p x!3)
+(get-abduct-next)
+(get-abduct-next)
+(get-abduct-next)
+(get-abduct-next)
+(pop 1)
+
+(exit)

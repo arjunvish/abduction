@@ -1,15 +1,16 @@
-;Example from abduction paper
+;Example from abduction paper using 
+;8-bit BV instead of infinite precision integers
 ;Hypothesis is separated from goal
 (set-option :produce-abducts true)
 (set-option :incremental true)
-(set-logic QF_LIA)
-(declare-fun x () Int)
-(declare-fun y () Int)
-(declare-fun z () Int)
-(assert (>= y 0))
+(set-logic QF_BV)
+(declare-fun x () (_ BitVec 8))
+(declare-fun y () (_ BitVec 8))
+(declare-fun z () (_ BitVec 8))
+(assert (bvsge y #x00))
 
 
-(get-abduct A (>= (+ x y z) 0))
+(get-abduct A (bvsge (bvadd x y z) #x00))
 (get-abduct-next)
 ;cvc5 --produce-abducts test1.smt2
 ;(define-fun A () Bool (= (+ x z) y))

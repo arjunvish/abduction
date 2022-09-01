@@ -9,7 +9,7 @@
                ))
       (GBV64 (_ BitVec 64) (
                 x 										                                                      ;variables
-      			    #x00000001 #x00000000 #xFFFFFFFF							                              ;constants
+      			    #x0000000000000001 #x0000000000000000 #xFFFFFFFFFFFFFFFF                    ;constants
                 (bvnot GBV64) (bvand GBV64 GBV64) (bvor GBV64 GBV64) (bvxor GBV64 GBV64)    ;logical
                 (bvneg GBV64) (bvadd GBV64 GBV64) (bvsub GBV64 GBV64)                       ;linear arithmetic
                 (bvmul GBV64 GBV64)                                                         ;mult   
@@ -57,7 +57,7 @@
                ))
       (GBV16 (_ BitVec 16) (
                 x 										                                                      ;variables
-      			    #x00000001 #x00000000 #xFFFFFFFF							                              ;constants
+      			    #x0001 #x0000 #xFFFF							                                          ;constants
                 (bvnot GBV16) (bvand GBV16 GBV16) (bvor GBV16 GBV16) (bvxor GBV16 GBV16)    ;logical
                 (bvneg GBV16) (bvadd GBV16 GBV16) (bvsub GBV16 GBV16)                       ;linear arithmetic
                 (bvmul GBV16 GBV16)                                                         ;mult   
@@ -81,7 +81,7 @@
                ))
       (GBV8 (_ BitVec 8) (
                 x 										                                                      ;variables
-      			    #x00000001 #x00000000 #xFFFFFFFF							                              ;constants
+      			    #x01 #x00 #xFF							                                                ;constants
                 (bvnot GBV8) (bvand GBV8 GBV8) (bvor GBV8 GBV8) (bvxor GBV8 GBV8)           ;logical
                 (bvneg GBV8) (bvadd GBV8 GBV8) (bvsub GBV8 GBV8)                            ;linear arithmetic
                 (bvmul GBV8 GBV8)                                                           ;mult   

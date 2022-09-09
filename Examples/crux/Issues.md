@@ -27,7 +27,7 @@ Ran all experiments while keeping unsat cores internally off, since cvc5 wasn't 
 | addinv     | `\|= x + y == x`          | `y = -x`        | `(= (bvshl y x) x)`     | real	3m0.004s | `(= (bvshl y x) x)`     | real	3m0.003s  | both: what4 rewrites as `-y = x`             |
 |            |                           |                 | `(= (bvneg y) x)`       | user	0m0.074s | `(= (bvneg y) x)`       | user	0m0.062s  |                                              |
 |            |                           |                 | Timeout                 | sys	0m0.035s | Timeout                 | sys	0m0.052s  |                                              |
-| andex      | `x = 1 \|= x & y == 1`    | `x = 1 ^ y = 1` | `(= y 1)`               | real	3m0.003s | `(= y 1)`               | real	0m1.166s  |                                              |
+| andex      | `x = 1 \|= x & y == 1`    | `y = 1`         | `(= y 1)`               | real	3m0.003s | `(= y 1)`               | real	0m1.166s  |                                              |
 |            |                           |                 | `(bvult 0 (bvand y 1))` | user	0m0.045s | `(= (bvnot 0) y)`       | user	0m0.962s  |                                              |
 |            |                           |                 | Timeout                 | sys	0m0.051s | `(= (bvor 1 y) y)`      | sys	0m0.132s  |                                              |
 | file       | `x < 100 \|= x + 1 < 100` | `x < 99`        | `(= 0 x)`               | real	0m0.656s | `(= 0 x)`               | real	0m0.509s  |                                              |
@@ -59,7 +59,7 @@ Repeated with a version of cvc5 where the unsat cores vs get-abduct bug was fixe
 | addinv     | `\|= x + y == x`          | `y = -x`        | `(= (bvshl x y) y)`           | real	3m0.003s  | `(= (bvneg y) x)`       | real	3m0.002s | both: what4 rewrites as `-y = x`             |
 |            |                           |                 | `(bvult (bvadd x y) 1)`       | user	0m0.058s  | Timeout                 | user	0m0.038s |                                              |
 |            |                           |                 | Timeout                       | sys	0m0.028s  | Timeout                 | sys	0m0.027s |                                              |
-| andex      | `x = 1 \|= x & y == 1`    | `x = 1 ^ y = 1` | `(= 1 y)`                     | real	3m0.003s  | `(= y 1)`               | real	3m0.002s |                                              |
+| andex      | `x = 1 \|= x & y == 1`    | `y = 1`         | `(= 1 y)`                     | real	3m0.003s  | `(= y 1)`               | real	3m0.002s |                                              |
 |            |                           |                 | `(bvult 0 (bvand y 1))`       | user	0m0.051s  | `(bvult 0 (bvand y 1))` | user	0m0.031s |                                              |
 |            |                           |                 | Timeout                       | sys	0m0.038s  | Timeout                 | sys	0m0.039s |                                              |
 | file       | `x < 100 \|= x + 1 < 100` | `x < 99`        | `(bvult x 1)`                 | real	0m0.602s  | `(bvult x 1)`           | real	0m0.535s |                                              |

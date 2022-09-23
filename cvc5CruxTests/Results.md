@@ -1,13 +1,12 @@
-|            |                           |                 | No options                                  | Fast enum option                              |
-| Test       | Entailment                | Baseline        | Abducts                         | Time      | Abducts                           | Time      | Notes                                        |
+| Test       | Entailment                | Baseline        | Abducts (No options)            | Time      | Abducts (Fast enum)               | Time      | Notes                                        |
 |------------|---------------------------|-----------------|---------------------------------|-----------|-----------------------------------|-----------|----------------------------------------------|
 | abdpaper   | `y > 0 \|= x + y + z > 0` | `x + z > 0`     | `(= (bvsrem z x) x)`            | 2m42.447s | `(= z (bvneg x))`                 | 2m42.736s |                                              |
 | 8-bit      |                           |                 | `(= (bvneg x) z)`               |           | `(= z (bvmul x (bvsdiv y 0)))`    |           |                                              |
 |            |                           |                 | `(= (bvsdiv z (bvsdiv y 0)) x)` |           | `(bvult z (bvudiv 1 (bvor y x)))` |           |                                              |
-| addident   | `\|= x + y == x`          | `y = 0`         | `(bvult y 1)`                   | 2m58.999s | `(= y 0)`                         | 2m59.215s | both: what4 rewrites as `y = 0`, removes `x` |
+| addident   | `\|= x + y == x`          | `y = 0`         | `(bvult y 1)`                   | 2m58.999s | `(= y 0)`                         | 2m59.215s |                                              |
 | 8-bit      |                           |                 |                                 |           |                                   |           |                                              |
 |            |                           |                 |                                 |           |                                   |           |                                              |
-| addinv     | `\|= x + y == x`          | `y = -x`        | `(bvult (bvor x y) 1)`          | 2m59.028s | `(= x (bvneg y))`                 | 2m59.269s | both: what4 rewrites as `-y = x`             |
+| addinv     | `\|= x + y == x`          | `y = -x`        | `(bvult (bvor x y) 1)`          | 2m59.028s | `(= x (bvneg y))`                 | 2m59.269s |                                              |
 | 8-bit      |                           |                 | `(bvult (bvadd y x) 1)`         |           |                                   |           |                                              |
 |            |                           |                 |                                 |           |                                   |           |                                              |
 | andex      | `x = 1 \|= x & y == 1`    | `y = 1`         | `(= 1 y)`                       | 0m0.613s  | `(= y 1)`                         | 0m0.185s  |                                              |
@@ -28,10 +27,10 @@
 | trans      | `x > y \|= x > z`         | `y > z`         | `(= z y)`                       | 0m3.101s  | `(= z y)`                         | 0m0.755s  |                                              |
 | 8-bit      |                           |                 | `(= (bvsdiv y z) z)`            |           | `(bvult z (bvsrem z x))`          |           |                                              |
 |            |                           |                 | `(= (bvurem y x) z)`            |           | `(bvult z (bvsrem z y))`          |           |                                              |
-| addident   | `\|= x + y == x`          | `y = 0`         | `(bvult y 1)`                   | 2m58.878s | `(= y 0)`                         | 2m58.890s | both: what4 rewrites as `y = 0`, removes `x` |
+| addident   | `\|= x + y == x`          | `y = 0`         | `(bvult y 1)`                   | 2m58.878s | `(= y 0)`                         | 2m58.890s |                                              |
 | 32-bit     |                           |                 |                                 |           |                                   |           |                                              |
 |            |                           |                 |                                 |           |                                   |           |                                              |
-| addinv     | `\|= x + y == x`          | `y = -x`        |                                 | 2m58.732s | `(= x (bvneg y)))`                | 2m58.819s | both: what4 rewrites as `-y = x`             |
+| addinv     | `\|= x + y == x`          | `y = -x`        |                                 | 2m58.732s | `(= x (bvneg y)))`                | 2m58.819s |                                              |
 | 32-bit     |                           |                 |                                 |           |                                   |           |                                              |
 |            |                           |                 |                                 |           |                                   |           |                                              |
 | andex      | `x = 1 \|= x & y == 1`    | `y = 1`         | `(= 1 y)`                       | 2m58.965s | `(= y 1)`                         | 0m2.351s  |                                              |

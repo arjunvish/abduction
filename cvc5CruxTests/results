@@ -1,0 +1,675 @@
+Running tests for 3 minutes each
+
+8bit abd paper
+(:error-behavior immediate-exit)
+sat
+((x #b11000000))
+((y #b01000000))
+((z #b00000000))
+(define-fun abd () Bool (= (bvsrem z x) x))
+(define-fun abd () Bool (= (bvneg x) z))
+(define-fun abd () Bool (= (bvsdiv z (bvsdiv y #b00000000)) x))
+
+real	2m43.403s
+user	2m42.447s
+sys	0m0.135s
+
+8bit abd paper fast enum
+(:error-behavior immediate-exit)
+sat
+((x #b11000000))
+((y #b01000000))
+((z #b00000000))
+(define-fun abd () Bool (= z (bvneg x)))
+(define-fun abd () Bool (= z (bvmul x (bvsdiv y #b00000000))))
+(define-fun abd () Bool (bvult z (bvudiv #b00000001 (bvor y x))))
+
+real	2m43.487s
+user	2m42.736s
+sys	0m0.069s
+
+8bit add ident
+(:error-behavior immediate-exit)
+sat
+((y #b00000001))
+(define-fun abd () Bool (bvult y #b00000001))
+cvc5 interrupted by SIGTERM.
+
+real	3m0.016s
+user	2m58.999s
+sys	0m0.121s
+
+8bit add ident fast enum
+(:error-behavior immediate-exit)
+sat
+((y #b00000001))
+(define-fun abd () Bool (= y #b00000000))
+cvc5 interrupted by SIGTERM.
+
+real	3m0.017s
+user	2m59.215s
+sys	0m0.097s
+
+8bit add inv
+(:error-behavior immediate-exit)
+sat
+((x #b11111110))
+((y #b11111111))
+(define-fun abd () Bool (bvult (bvor x y) #b00000001))
+(define-fun abd () Bool (bvult (bvadd y x) #b00000001))
+cvc5 interrupted by SIGTERM.
+
+real	3m0.021s
+user	2m59.028s
+sys	0m0.144s
+
+8bit add inv fast enum
+(:error-behavior immediate-exit)
+sat
+((x #b11111110))
+((y #b11111111))
+(define-fun abd () Bool (= x (bvneg y)))
+cvc5 interrupted by SIGTERM.
+
+real	3m0.014s
+user	2m59.269s
+sys	0m0.087s
+
+8bit and ex
+(:error-behavior immediate-exit)
+sat
+((x #b00000001))
+((y #b00000000))
+(define-fun abd () Bool (= #b00000001 y))
+(define-fun abd () Bool (bvult (bvsrem #b00000001 y) #b00000001))
+(define-fun abd () Bool (= (bvmul y y) #b00000001))
+
+real	0m0.639s
+user	0m0.613s
+sys	0m0.013s
+
+8bit and ex fast enum
+(:error-behavior immediate-exit)
+sat
+((x #b00000001))
+((y #b00000000))
+(define-fun abd () Bool (= y #b00000001))
+(define-fun abd () Bool (= y (bvnot #b00000000)))
+(define-fun abd () Bool (= y (bvor y #b00000001)))
+
+real	0m0.198s
+user	0m0.185s
+sys	0m0.009s
+
+8bit max int
+(:error-behavior immediate-exit)
+sat
+((x #b11111111))
+(define-fun abd () Bool (bvult x #b00000001))
+(define-fun abd () Bool (bvult x #b11111111))
+cvc5 interrupted by SIGTERM.
+
+real	3m0.019s
+user	2m58.865s
+sys	0m0.110s
+
+8bit max int fast enum
+(:error-behavior immediate-exit)
+sat
+((x #b11111111))
+(define-fun abd () Bool (= x #b00000000))
+(define-fun abd () Bool (= x #b00000001))
+(define-fun abd () Bool (bvult x #b11111111))
+
+real	0m0.104s
+user	0m0.085s
+sys	0m0.010s
+
+8bit mult ident
+success
+success
+success
+success
+success
+success
+(:error-behavior immediate-exit)
+success
+success
+success
+success
+success
+success
+success
+success
+sat
+((x #b11111111))
+((y #b00000000))
+success
+(define-fun abd () Bool (bvult x #b00000001))
+(define-fun abd () Bool (= #b00000001 y))
+(define-fun abd () Bool (= (bvmul y x) x))
+success
+success
+
+real	0m5.859s
+user	0m5.790s
+sys	0m0.029s
+
+8bit mult ident fast enum
+success
+success
+success
+success
+success
+success
+(:error-behavior immediate-exit)
+success
+success
+success
+success
+success
+success
+success
+success
+sat
+((x #b11111111))
+((y #b00000000))
+success
+(define-fun abd () Bool (= x #b00000000))
+(define-fun abd () Bool (= y #b00000001))
+(define-fun abd () Bool (= x (bvmul x y)))
+success
+success
+
+real	0m0.225s
+user	0m0.214s
+sys	0m0.008s
+
+8bit mult inv
+success
+success
+success
+success
+success
+success
+(:error-behavior immediate-exit)
+success
+success
+success
+success
+success
+success
+success
+success
+sat
+((x #b00000001))
+((y #b00000001))
+success
+(define-fun abd () Bool (= x #b00000000))
+(define-fun abd () Bool (= y #b00000000))
+(define-fun abd () Bool (= (bvmul y x) #b00000000))
+success
+success
+
+real	0m0.886s
+user	0m0.865s
+sys	0m0.014s
+
+8bit mult inv fast enum
+success
+success
+success
+success
+success
+success
+(:error-behavior immediate-exit)
+success
+success
+success
+success
+success
+success
+success
+success
+sat
+((x #b00000001))
+((y #b00000001))
+success
+(define-fun abd () Bool (= x #b00000000))
+(define-fun abd () Bool (= y #b00000000))
+(define-fun abd () Bool (= #b00000000 (bvmul x y)))
+success
+success
+
+real	0m5.060s
+user	0m5.012s
+sys	0m0.019s
+
+8bit test file
+success
+success
+success
+success
+success
+success
+(:error-behavior immediate-exit)
+success
+success
+success
+success
+success
+success
+success
+success
+success
+sat
+((x #b01100011))
+success
+(define-fun abd () Bool (bvult x #b00000001))
+(define-fun abd () Bool (bvult #b01100100 x))
+(define-fun abd () Bool (= #b00000001 x))
+success
+success
+
+real	0m0.185s
+user	0m0.176s
+sys	0m0.006s
+
+8bit test file fast enum
+success
+success
+success
+success
+success
+success
+(:error-behavior immediate-exit)
+success
+success
+success
+success
+success
+success
+success
+success
+success
+sat
+((x #b01100011))
+success
+(define-fun abd () Bool (= x #b00000000))
+(define-fun abd () Bool (= x #b00000001))
+(define-fun abd () Bool (bvult #b01100100 x))
+success
+success
+
+real	0m0.107s
+user	0m0.097s
+sys	0m0.008s
+
+8bit trans
+success
+success
+success
+success
+success
+success
+(:error-behavior immediate-exit)
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+sat
+((x #b10000001))
+((y #b10000000))
+((z #b00101010))
+success
+(define-fun abd () Bool (= z y))
+(define-fun abd () Bool (= (bvsdiv y z) z))
+(define-fun abd () Bool (= (bvurem y x) z))
+success
+success
+
+real	0m3.140s
+user	0m3.101s
+sys	0m0.019s
+
+8bit trans fast enum
+success
+success
+success
+success
+success
+success
+(:error-behavior immediate-exit)
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+sat
+((x #b10000001))
+((y #b10000000))
+((z #b00101010))
+success
+(define-fun abd () Bool (= z y))
+(define-fun abd () Bool (bvult z (bvsrem z x)))
+(define-fun abd () Bool (bvult z (bvsrem z y)))
+success
+success
+
+real	0m0.772s
+user	0m0.755s
+sys	0m0.011s
+
+32bit abd paper
+(:error-behavior immediate-exit)
+sat
+((x #b01000000000000000000000000000000))
+((y #b01000000000000000000000000000000))
+(define-fun abd () Bool (bvult x #b00000000000000000000000000000001))
+(define-fun abd () Bool (= (bvneg x) y))
+(define-fun abd () Bool (= (bvneg #b00000000000000000000000000000001) x))
+sat
+((x #b00100000000110100000000000000000))
+((y #b01111111110010100000000000000000))
+((z #b10011111111001000000000000000000))
+((x!11 #b10011111111001000000000000000000))
+(define-fun abd () Bool (= #b00000000000000000000000000000000 z))
+(define-fun abd () Bool (bvult y (bvudiv z z)))
+cvc5 interrupted by SIGTERM.
+
+real	3m0.025s
+user	2m58.797s
+sys	0m0.275s
+
+32bit abd paper fast enum
+(:error-behavior immediate-exit)
+sat
+((x #b01000000000000000000000000000000))
+((y #b01000000000000000000000000000000))
+(define-fun abd () Bool (= x #b00000000000000000000000000000000))
+(define-fun abd () Bool (= x (bvneg x)))
+(define-fun abd () Bool (= x (bvnot y)))
+sat
+((x #b00100000000110100000000000000000))
+((y #b01111111110010100000000000000000))
+((z #b10011111111001000000000000000000))
+((x!11 #b10011111111001000000000000000000))
+(define-fun abd () Bool (= z #b00000000000000000000000000000000))
+cvc5 interrupted by SIGTERM.
+
+real	3m0.014s
+user	2m58.862s
+sys	0m0.130s
+
+32bit add ident
+(:error-behavior immediate-exit)
+sat
+((y #b00000000000000000000000000000001))
+(define-fun abd () Bool (bvult y #b00000000000000000000000000000001))
+cvc5 interrupted by SIGTERM.
+
+real	3m0.017s
+user	2m58.878s
+sys	0m0.156s
+
+32bit add ident fast enum
+(:error-behavior immediate-exit)
+sat
+((y #b00000000000000000000000000000001))
+(define-fun abd () Bool (= y #b00000000000000000000000000000000))
+cvc5 interrupted by SIGTERM.
+
+real	3m0.016s
+user	2m58.890s
+sys	0m0.114s
+
+32bit add inv
+(:error-behavior immediate-exit)
+sat
+((x #b11111111111111111111111111111110))
+((y #b11111111111111111111111111111111))
+cvc5 interrupted by SIGTERM.
+
+real	3m0.007s
+user	2m58.732s
+sys	0m0.120s
+
+32bit add inv fast enum
+(:error-behavior immediate-exit)
+sat
+((x #b11111111111111111111111111111110))
+((y #b11111111111111111111111111111111))
+(define-fun abd () Bool (= x (bvneg y)))
+cvc5 interrupted by SIGTERM.
+
+real	3m0.008s
+user	2m58.819s
+sys	0m0.126s
+
+32bit and ex
+(:error-behavior immediate-exit)
+sat
+((x #b00000000000000000000000000000001))
+((y #b00000000000000000000000000000000))
+(define-fun abd () Bool (= #b00000000000000000000000000000001 y))
+(define-fun abd () Bool (bvult (bvxor #b00000000000000000000000000000001 y) y))
+cvc5 interrupted by SIGTERM.
+
+real	3m0.011s
+user	2m58.965s
+sys	0m0.087s
+
+32bit and ex fast enum
+(:error-behavior immediate-exit)
+sat
+((x #b00000000000000000000000000000001))
+((y #b00000000000000000000000000000000))
+(define-fun abd () Bool (= y #b00000000000000000000000000000001))
+(define-fun abd () Bool (= y (bvnot #b00000000000000000000000000000000)))
+(define-fun abd () Bool (= y (bvor y #b00000000000000000000000000000001)))
+
+real	0m2.413s
+user	0m2.351s
+sys	0m0.043s
+
+32bit max int
+(:error-behavior immediate-exit)
+sat
+((x #b11111111111111111111111111111111))
+(define-fun abd () Bool (bvult x #b00000000000000000000000000000001))
+(define-fun abd () Bool (bvult x #b11111111111111111111111111111111))
+cvc5 interrupted by SIGTERM.
+
+real	3m0.015s
+user	2m58.923s
+sys	0m0.096s
+
+32bit max int fast enum
+(:error-behavior immediate-exit)
+sat
+((x #b11111111111111111111111111111111))
+(define-fun abd () Bool (= x #b00000000000000000000000000000000))
+(define-fun abd () Bool (= x #b00000000000000000000000000000001))
+(define-fun abd () Bool (bvult x #b11111111111111111111111111111111))
+
+real	0m0.075s
+user	0m0.061s
+sys	0m0.007s
+
+32bit mult ident
+(:error-behavior immediate-exit)
+sat
+((x #b10000110010011100101001000001100))
+((y #b01001000000000010000010000010101))
+(define-fun abd () Bool (= x #b00000000000000000000000000000000))
+(define-fun abd () Bool (= x #b00000000000000000000000000000001))
+cvc5 interrupted by SIGTERM.
+
+real	3m0.011s
+user	2m58.823s
+sys	0m0.196s
+
+32bit mult ident fast enum
+(:error-behavior immediate-exit)
+sat
+((x #b10000110010011100101001000001100))
+((y #b01001000000000010000010000010101))
+cvc5 interrupted by SIGTERM.
+
+real	3m0.012s
+user	2m58.649s
+sys	0m0.149s
+
+32bit mult inv
+(:error-behavior immediate-exit)
+sat
+((x #b10000110010011100101001000001100))
+((y #b01001000000000010000010000010101))
+(define-fun abd () Bool (= x #b00000000000000000000000000000000))
+(define-fun abd () Bool (= x #b00000000000000000000000000000001))
+cvc5 interrupted by SIGTERM.
+
+real	3m0.017s
+user	2m58.667s
+sys	0m0.262s
+
+32bit mult inv fast enum
+(:error-behavior immediate-exit)
+sat
+((x #b10000110010011100101001000001100))
+((y #b01001000000000010000010000010101))
+cvc5 interrupted by SIGTERM.
+
+real	3m0.014s
+user	2m58.767s
+sys	0m0.170s
+
+32bit test file
+success
+success
+success
+success
+success
+success
+(:error-behavior immediate-exit)
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+unsat
+(
+x!1
+x!8
+)
+success
+success
+success
+success
+success
+success
+success
+sat
+((x #b00000000000000000000000001100011))
+success
+(define-fun abd () Bool (bvult x #b00000000000000000000000000000001))
+(define-fun abd () Bool (bvult #b00000000000000000000000001100100 x))
+(define-fun abd () Bool (= #b00000000000000000000000000000001 x))
+success
+success
+
+real	0m0.172s
+user	0m0.155s
+sys	0m0.009s
+
+32bit test file fast enum
+success
+success
+success
+success
+success
+success
+(:error-behavior immediate-exit)
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+unsat
+(
+x!1
+x!8
+)
+success
+success
+success
+success
+success
+success
+success
+sat
+((x #b00000000000000000000000001100011))
+success
+(define-fun abd () Bool (= x #b00000000000000000000000000000000))
+(define-fun abd () Bool (= x #b00000000000000000000000000000001))
+(define-fun abd () Bool (bvult #b00000000000000000000000001100100 x))
+success
+success
+
+real	0m0.086s
+user	0m0.079s
+sys	0m0.005s
+
+32bit trans
+(:error-behavior immediate-exit)
+sat
+((x #b10000000000000000000000000000001))
+((y #b10000000000000000000000000000000))
+((z #b00101010101010101010101010101010))
+(define-fun abd () Bool (= z y))
+cvc5 interrupted by SIGTERM.
+
+real	3m0.008s
+user	2m58.979s
+sys	0m0.074s
+
+32bit trans fast enum
+(:error-behavior immediate-exit)
+sat
+((x #b10000000000000000000000000000001))
+((y #b10000000000000000000000000000000))
+((z #b00101010101010101010101010101010))
+(define-fun abd () Bool (= z y))
+cvc5 interrupted by SIGTERM.
+
+real	3m0.007s
+user	2m58.803s
+sys	0m0.087s
+

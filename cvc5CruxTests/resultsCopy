@@ -1,0 +1,193 @@
+Running tests for 3 minutes each
+
+8bit abd paper
+(= (bvsrem z x) x)
+(= (bvneg x) z)
+(= (bvsdiv z (bvsdiv y 0)) x)
+user	2m42.447s
+
+8bit abd paper fast enum
+(= z (bvneg x))
+(= z (bvmul x (bvsdiv y 0)))
+(bvult z (bvudiv 1 (bvor y x)))
+user	2m42.736s
+
+8bit add ident
+(bvult y 1)
+user	2m58.999s
+
+8bit add ident fast enum
+(= y 0)
+user	2m59.215s
+
+8bit add inv
+(bvult (bvor x y) 1)
+(bvult (bvadd y x) 1)
+user	2m59.028s
+
+8bit add inv fast enum
+(= x (bvneg y))
+user	2m59.269s
+
+8bit and ex
+(= 1 y)
+(bvult (bvsrem 1 y) 1)
+(= (bvmul y y) 1)
+user	0m0.613s
+
+8bit and ex fast enum
+(= y 1)
+(= y (bvnot 0))
+(= y (bvor y 1))
+user	0m0.185s
+
+8bit file
+(bvult x 1)
+(bvult 100 x)
+(= 1 x)
+user	0m0.176s
+
+8bit file fast enum
+(= x 0)
+(= x 1)
+(bvult 100 x)
+user	0m0.097s
+
+8bit max int
+(bvult x 1)
+(bvult x 255)
+user	2m58.865s
+
+8bit max int fast enum
+(= x 0)
+(= x 1)
+(bvult x 255)
+user	0m0.085s
+
+8bit mult ident
+(bvult x 1)
+(= 1 y)
+(= (bvmul y x) x)
+user	0m5.790s
+
+8bit mult ident fast enum
+(= x 0)
+(= y 1)
+(= x (bvmul x y))
+user	0m0.214s
+
+8bit mult inv
+(= x 0)
+(= y 0)
+(= (bvmul y x) 0)
+user	0m0.865s
+
+8bit mult inv fast enum
+(= x 0)
+(= y 0)
+(= 0 (bvmul x y))
+user	0m5.012s
+
+8bit trans
+(= z y)
+(= (bvsdiv y z) z)
+(= (bvurem y x) z)
+user	0m3.101s
+
+8bit trans fast enum
+(= z y)
+(bvult z (bvsrem z x))
+(bvult z (bvsrem z y))
+user	0m0.755s
+
+32bit abd paper
+(bvult x 1)
+(= (bvneg x) y)
+(= (bvneg 1) x)
+
+(= 0 z)
+(bvult y (bvudiv z z))
+
+user	2m58.797s
+
+32bit abd paper fast enum
+(= x 0)
+(= x (bvneg x))
+(= x (bvnot y))
+
+(= z 0)
+
+user	2m58.862s
+
+32bit add ident
+(bvult y 1)
+user	2m58.878s
+
+32bit add ident fast enum
+(= y 0)
+user	2m58.890s
+
+32bit add inv
+user	2m58.732s
+
+32bit add inv fast enum
+(= x (bvneg y)))
+user	2m58.819s
+
+32bit and ex
+(= 1 y)
+(bvult (bvxor 1 y) y)
+user	2m58.965s
+
+32bit and ex fast enum
+(= y 1)
+(= y (bvnot 0))
+(= y (bvor y 1))
+user	0m2.351s
+
+32bit file
+(bvult x 1)
+(bvult 100 x)
+(= 1 x)
+user	0m0.155s
+
+32bit file fast enum
+(= x 0)
+(= x 1)
+(bvult 100 x)
+user	0m0.079s
+
+32bit max int
+(bvult x 1)
+(bvult x 4294967295)
+user	2m58.923s
+
+32bit max int fast enum
+(= x 0)
+(= x 1)
+(bvult x 4294967295)
+user	0m0.061s
+
+32bit mult ident
+(= x 0)
+(= x 1)
+user	2m58.823s
+
+32bit mult ident fast enum
+user	2m58.649s
+
+32bit mult inv
+(= x 0)
+(= x 1)
+user	2m58.667s
+
+32bit mult inv fast enum
+user	2m58.767s
+
+32bit trans
+(= z y)
+user	2m58.979s
+
+32bit trans fast enum
+(= z y)
+user	2m58.803s

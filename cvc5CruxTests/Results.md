@@ -1,0 +1,54 @@
+|            |                           |                 | No options                                  | Fast enum option                              |
+| Test       | Entailment                | Baseline        | Abducts                         | Time      | Abducts                           | Time      | Notes                                        |
+|------------|---------------------------|-----------------|---------------------------------|-----------|-----------------------------------|-----------|----------------------------------------------|
+| abdpaper   | `y > 0 \|= x + y + z > 0` | `x + z > 0`     | `(= (bvsrem z x) x)`            | 2m42.447s | `(= z (bvneg x))`                 | 2m42.736s |                                              |
+| 8-bit      |                           |                 | `(= (bvneg x) z)`               |           | `(= z (bvmul x (bvsdiv y 0)))`    |           |                                              |
+|            |                           |                 | `(= (bvsdiv z (bvsdiv y 0)) x)` |           | `(bvult z (bvudiv 1 (bvor y x)))` |           |                                              |
+| addident   | `\|= x + y == x`          | `y = 0`         | `(bvult y 1)`                   | 2m58.999s | `(= y 0)`                         | 2m59.215s | both: what4 rewrites as `y = 0`, removes `x` |
+| 8-bit      |                           |                 |                                 |           |                                   |           |                                              |
+|            |                           |                 |                                 |           |                                   |           |                                              |
+| addinv     | `\|= x + y == x`          | `y = -x`        | `(bvult (bvor x y) 1)`          | 2m59.028s | `(= x (bvneg y))`                 | 2m59.269s | both: what4 rewrites as `-y = x`             |
+| 8-bit      |                           |                 | `(bvult (bvadd y x) 1)`         |           |                                   |           |                                              |
+|            |                           |                 |                                 |           |                                   |           |                                              |
+| andex      | `x = 1 \|= x & y == 1`    | `y = 1`         | `(= 1 y)`                       | 0m0.613s  | `(= y 1)`                         | 0m0.185s  |                                              |
+| 8-bit      |                           |                 | `(bvult (bvsrem 1 y) 1)`        |           | `(= y (bvnot 0))`                 |           |                                              |
+|            |                           |                 | `(= (bvmul y y) 1)`             |           | `(= y (bvor y 1))`                |           |                                              |
+| file       | `x < 100 \|= x + 1 < 100` | `x < 99`        | `(bvult x 1)`                   | 0m0.176s  | `(= x 0)`                         | 0m0.097s  |                                              |
+| 8-bit      |                           |                 | `(bvult 100 x)`                 |           | `(= x 1)`                         |           |                                              |
+|            |                           |                 | `(= 1 x)`                       |           | `(bvult 100 x)`                   |           |                                              |
+| maxint     | `\|= x + 1 > x`           | `x < maxint`    | `(bvult x 1)`                   | 2m58.865s | `(= x 0)`                         | 0m0.085s  |                                              |
+| 8-bit      |                           |                 | `(bvult x 255)`                 |           | `(= x 1)`                         |           |                                              |
+|            |                           |                 |                                 |           | `(bvult x 255)`                   |           |                                              |
+| multident  | `\|= x * y == x`          | `y = 1`         | `(bvult x 1)`                   | 0m5.790s  | `(= x 0)`                         | 0m0.214s  |                                              |
+| 8-bit      |                           |                 | `(= 1 y)`                       |           | `(= y 1)`                         |           |                                              |
+|            |                           |                 | `(= (bvmul y x) x)`             |           | `(= x (bvmul x y))`               |           |                                              |
+| multinv    | `\|= x * y == x`          | `y = 0`         | `(= x 0)`                       | 0m0.865s  | `(= x 0)`                         | 0m5.012s  |                                              |
+| 8-bit      |                           |                 | `(= y 0)`                       |           | `(= y 0)`                         |           |                                              |
+|            |                           |                 | `(= (bvmul y x) 0)`             |           | `(= 0 (bvmul x y))`               |           |                                              |
+| trans      | `x > y \|= x > z`         | `y > z`         | `(= z y)`                       | 0m3.101s  | `(= z y)`                         | 0m0.755s  |                                              |
+| 8-bit      |                           |                 | `(= (bvsdiv y z) z)`            |           | `(bvult z (bvsrem z x))`          |           |                                              |
+|            |                           |                 | `(= (bvurem y x) z)`            |           | `(bvult z (bvsrem z y))`          |           |                                              |
+| addident   | `\|= x + y == x`          | `y = 0`         | `(bvult y 1)`                   | 2m58.878s | `(= y 0)`                         | 2m58.890s | both: what4 rewrites as `y = 0`, removes `x` |
+| 32-bit     |                           |                 |                                 |           |                                   |           |                                              |
+|            |                           |                 |                                 |           |                                   |           |                                              |
+| addinv     | `\|= x + y == x`          | `y = -x`        |                                 | 2m58.732s | `(= x (bvneg y)))`                | 2m58.819s | both: what4 rewrites as `-y = x`             |
+| 32-bit     |                           |                 |                                 |           |                                   |           |                                              |
+|            |                           |                 |                                 |           |                                   |           |                                              |
+| andex      | `x = 1 \|= x & y == 1`    | `y = 1`         | `(= 1 y)`                       | 2m58.965s | `(= y 1)`                         | 0m2.351s  |                                              |
+| 32-bit     |                           |                 | `(bvult (bvxor 1 y) y)`         |           | `(= y (bvnot 0))`                 |           |                                              |
+|            |                           |                 |                                 |           | `(= y (bvor y 1))`                |           |                                              |
+| file       | `x < 100 \|= x + 1 < 100` | `x < 99`        | `(bvult x 1)`                   | 0m0.155s  | `(= x 0)`                         | 0m0.079s  |                                              |
+| 32-bit     |                           |                 | `(bvult 100 x)`                 |           | `(= x 1)`                         |           |                                              |
+|            |                           |                 | `(= 1 x)`                       |           | `(bvult 100 x)`                   |           |                                              |
+| maxint     | `\|= x + 1 > x`           | `x < maxint`    | `(bvult x 1)`                   | 2m58.923s | `(= x 0)`                         | 0m0.061s  |                                              |
+| 32-bit     |                           |                 | `(bvult x 4294967295)`          |           | `(= x 1)`                         |           |                                              |
+|            |                           |                 |                                 |           | `(bvult x 4294967295)`            |           |                                              |
+| multident  | `\|= x * y == x`          | `y = 1`         | `(= x 0)`                       | 2m58.823s |                                   | 2m58.649s |                                              |
+| 32-bit     |                           |                 | `(= x 1)`                       |           |                                   |           |                                              |
+|            |                           |                 |                                 |           |                                   |           |                                              |
+| multinv    | `\|= x * y == x`          | `y = 0`         | `(= x 0)`                       | 2m58.667s |                                   | 2m58.767s |                                              |
+| 32-bit     |                           |                 | `(= x 1)`                       |           |                                   |           |                                              |
+|            |                           |                 |                                 |           |                                   |           |                                              |
+| trans      | `x > y \|= x > z`         | `y > z`         | `(= z y)`                       | 2m58.979s | `(= z y)`                         | 2m58.803s |                                              |
+| 32-bit     |                           |                 |                                 |           |                                   |           |                                              |
+|            |                           |                 |                                 |           |                                   |           |                                              |
